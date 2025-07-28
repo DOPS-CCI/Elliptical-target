@@ -1,7 +1,7 @@
 # This archive consists of data and software related to the acquisition and analysis of an experimental protocol in which a subject is asked to locate a randomly generated target within an elliptical target area.
 Each trial consists of a hidden generation of a target uniformly within the ellipse; after at least 4 seconds, the subject indicates that she has made a decision; subject then makes her response within the elliptical target area; and the results of the trial are then displayed. An isolated, remote, agent is involved in approximately half of the trials, randomly chosen, in which the target location is displayed to the agent as well as the subsequent results.
 
-In this particular experimental run, there were a total of 13 sessions with a total of 386 trials. BD was the subject and there were two agents, MB and EK, for 10 and 3 of the experimental sessions respectively.
+In this particular experimental run, there were a total of 13 sessions with a total of 368 trials. BD was the subject and there were two agents, MB and EK, for 10 and 3 of the experimental sessions respectively.
 ## Trial data - CSV file
 Each trial is represented by a line in the file with these items separated by a comma (no header line):
 * Agent: Is agent active in this trial?
