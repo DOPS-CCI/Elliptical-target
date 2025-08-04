@@ -1,0 +1,35 @@
+﻿<StackPanel x:Class="CircleTargetExperiment.TechPanel"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:local="clr-namespace:CircleTargetExperiment"
+            mc:Ignorable="d"
+            Orientation="Vertical"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Stretch"
+            Background="Gray">
+    <StackPanel.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="15"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+    </StackPanel.Resources>
+    
+    <TextBlock Name="Baseline">Key B: acquire baseline</TextBlock>
+    <TextBlock Name="Start" Foreground="DarkGray">Key S: start new run</TextBlock>
+    <TextBlock Name="Abort" Foreground="DarkGray">Key A: abort/interrupt current trial</TextBlock>
+    <TextBlock Name="Continue" Foreground="DarkGray">Key C: continue protocol with new trial</TextBlock>
+    <TextBlock Name="End" Foreground="DarkGray">Key E: end protocol, saving results to this point</TextBlock>
+    <TextBlock Name="Quit">Key control-Q: emergency end to protocol; no results are saved</TextBlock>
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <TextBlock Text="Progress"/>
+        <ProgressBar x:Name="PB" Margin="8" Height="30" Width="400" Maximum="1"/>
+    </StackPanel>
+</StackPanel>

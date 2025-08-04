@@ -1,0 +1,25 @@
+﻿<Grid x:Class="CircleTargetExperiment.SubjectAbortPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CircleTargetExperiment"
+             mc:Ignorable="d" Height="400" Width="600"
+             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+    <Grid.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+    </Grid.Resources>
+    <TextBlock>
+        <Run Text="Trial aborted due to premature decision. "/>
+        <Run Text="Please wait for a minimum of "/>
+        <Run Name="MinWait"/>
+        <Run Text=" seconds after trial begins before indicating you are ready to respond."/>
+    </TextBlock>
+</Grid>
