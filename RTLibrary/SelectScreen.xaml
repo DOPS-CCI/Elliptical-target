@@ -1,0 +1,61 @@
+﻿<Window x:Class="RTLibrary.SelectScreen" x:ClassModifier="internal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:RTLibrary"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" FontWeight="Bold"
+        Title="Choose Screens" SizeToContent="WidthAndHeight">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+    </Window.Resources>
+    <StackPanel Orientation="Vertical">
+        <TextBlock>
+            <TextBlock Margin="10" FontSize="20">Select monitor assignments</TextBlock>
+        </TextBlock>
+        <Canvas x:Name="ScreenDiagram" Margin="20" HorizontalAlignment="Left" Height="400" Width="800">
+            <Canvas.Resources>
+                <Style TargetType="Grid">
+                </Style>
+                <Style TargetType="Rectangle">
+                    <Setter Property="Fill" Value="#FF9494FF"/>
+                    <Setter Property="Stroke" Value="Green"/>
+                    <Setter Property="StrokeThickness" Value="2"/>
+                    <EventSetter Event="MouseEnter" Handler="Screen_MouseEnter"/>
+                    <EventSetter Event="MouseLeave" Handler="Screen_MouseLeave"/>
+                </Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                    <Setter Property="Margin" Value="4"/>
+                </Style>
+                <Style TargetType="StackPanel">
+                    <Setter Property="Orientation" Value="Vertical"/>
+                    <Setter Property="VerticalAlignment" Value="Bottom"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="Margin" Value="4"/>
+                </Style>
+                <Style TargetType="RadioButton">
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="FontWeight" Value="Normal"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Margin" Value="1"/>
+                    <EventSetter Event="Click" Handler="RadioButton_Clicked"/>
+                </Style>
+            </Canvas.Resources>
+        </Canvas>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button IsCancel="True" Click="Cancel_Click">Cancel</Button>
+            <Button x:Name="OK" IsDefault="True" Click="OK_Click" IsEnabled="True">OK</Button>
+        </StackPanel>
+    </StackPanel>
+</Window>
