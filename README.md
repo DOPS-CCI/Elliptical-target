@@ -5,7 +5,7 @@ In this particular experimental run, there were a total of 13 sessions with a to
 ## Trial data - CSV file
 Each trial is represented by a line in the file with these items separated by a comma (no header line):
 * Agent: Is agent active in this trial?
-* AgentID: Identifier of the agent for this trial (may or may not be active)
+* AgentID: Identifier of the agent for this trial (may or may not be active for this trial)
 * TargetCx: x coordinate of target in reference circle
 * TargetCy: y coordinate of target in reference circle
 * ResponseCx: x coordinate of response in reference circle
@@ -23,3 +23,11 @@ Each trial is represented by a line in the file with these items separated by a 
 Import as a single variable as a List with each entry representing a single trial (see definitions above):
 
 `{Agent,AgentID,{TargetCx,TargetCy},{ResponseCx,ResponseCy},{TargetEx,TargetEy},{ResponseEx,ResponseEy},RawScore,{DateYear,DateMonth,DateDay},SessionID}`
+## Experimental protocol program
+Application protocol that drives the experimental sessions, trial-by-trial, and records the results
+## CCILibrary
+Library of routines, some of which are used by the by the experimental protocol program
+## CCIUltilites
+Another library of routines, some of which are used by the protocol
+## RTLibrary
+Library of routines which run the experimental protocol with millisecond timing resolution
