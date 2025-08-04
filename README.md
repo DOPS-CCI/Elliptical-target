@@ -27,7 +27,7 @@ Import as a single variable as a List with each entry representing a single tria
 Application protocol that drives the experimental sessions, trial-by-trial, and records the results
 ## CCILibrary
 Library of routines, some of which are used by the by the experimental protocol program
-## CCIUltilites
+## CCIUltilities
 Another library of routines, some of which are used by the protocol
 ## RTLibrary
 Library of routines which run the experimental protocol with millisecond timing resolution
