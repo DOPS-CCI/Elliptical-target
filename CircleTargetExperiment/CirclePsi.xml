@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Experiment>
+  <Title>Psi of target in circle</Title>
+  <SoftwareVersion>1.0.0.0</SoftwareVersion>
+  <LongDescription>Test of S ability to generate a response close to a target selected uniformly within a circle</LongDescription>
+  <Experimenter>Edward Kelly</Experimenter>
+  <ExperimentCode>TC</ExperimentCode>
+  <RTClockPeriod>1</RTClockPeriod>
+  <Status>16</Status>
+  <DisplayConfiguration Type="Ask">
+    <Technician/>
+    <Subject/>
+    <Agent Always="No"/>
+  </DisplayConfiguration>
+  
+  <Structure>
+    <GroupVar>
+      <Name>TrialNumber</Name>
+      <Description>Overall sequence number of protocol trial within session</Description>
+    </GroupVar>
+    <GroupVar>
+      <Name>RunTrialNumber</Name>
+      <Description>Sequence number of trial within current run</Description>
+    </GroupVar>
+    <GroupVar>
+      <Name>RunNumber</Name>
+      <Description>Sequence number of run within session</Description>
+    </GroupVar>
+    <GroupVar>
+      <Name>Agent</Name>
+      <Description>Did agent see the target for this trial?</Description>
+      <GV Desc="Yes">1</GV>
+      <GV Desc="No">2</GV>
+      <GV Desc="NoAgent">3</GV>
+    </GroupVar>
+    <GroupVar>
+      <Name>TargetX</Name>
+      <Description>Target X coordinate (-1000 to 1000)</Description>
+    </GroupVar>
+    <GroupVar>
+      <Name>TargetY</Name>
+      <Description>Target Y coordinate (-1000 to 1000)</Description>
+    </GroupVar>
+    <GroupVar>
+      <Name>TargetR</Name>
+      <Description>Target radial distance (0 to 1000)</Description>
+    </GroupVar>
+    <GroupVar>
+      <Name>ResponseX</Name>
+      <Description>Response X coordinate (-1000 to 1000)</Description>
+    </GroupVar>
+    <GroupVar>
+      <Name>ResponseY</Name>
+      <Description>Response Y coordinate (-1000 to 1000)</Description>
+    </GroupVar>
+    <GroupVar>
+      <Name>ResponseR</Name>
+      <Description>Response radial distance (0 to 1000)</Description>
+    </GroupVar>
+    <GroupVar>
+      <Name>DecisionT</Name>
+      <Description>Time of decision from target selection in milliseconds</Description>
+    </GroupVar>
+    <GroupVar>
+      <Name>Rho</Name>
+      <Description>Distance from target to response (0 to 2000)</Description>
+    </GroupVar>
+    <GroupVar>
+      <Name>Score</Name>
+      <Description>P-value score derived from target to response distance (0 to 1000). Lower is better.</Description>
+    </GroupVar>
+
+    <Event>
+      <Name>BeginBaseline</Name>
+      <Description>Begin baselne acquisition</Description>
+    </Event>
+    <Event>
+      <Name>EndBaseline</Name>
+      <Description>End baselne acquisition</Description>
+    </Event>
+    <Event Type="Extrinsic">
+      <Name>BeginTrial</Name>
+      <Description>S initiates next trial</Description>
+      <Channel>Mouse</Channel>
+      <Edge>rising</Edge>
+      <Location>before</Location>
+      <Max>120000</Max>
+      <Min>0</Min>
+      <GroupVar Name="TrialNumber"/>
+      <GroupVar Name="RunTrialNumber"/>
+      <GroupVar Name="RunNumber"/>
+      <GroupVar Name="Agent"/>
+      <GroupVar Name="TargetX"/>
+      <GroupVar Name="TargetY"/>
+      <GroupVar Name="TargetR"/>
+      <GroupVar Name="ResponseX"/>
+      <GroupVar Name="ResponseY"/>
+      <GroupVar Name="ResponseR"/>
+      <GroupVar Name="Rho"/>
+      <GroupVar Name="Score"/>
+    </Event>
+    <Event Type="Intrinsic">
+      <Name>TargetSelection</Name>
+      <Description>Random target selected within circle and revealed to Agent (if involved in trial)</Description>
+      <GroupVar Name="TrialNumber"/>
+      <GroupVar Name="RunTrialNumber"/>
+      <GroupVar Name="RunNumber"/>
+      <GroupVar Name="Agent"/>
+      <GroupVar Name="TargetX"/>
+      <GroupVar Name="TargetY"/>
+      <GroupVar Name="TargetR"/>
+      <GroupVar Name="ResponseX"/>
+      <GroupVar Name="ResponseY"/>
+      <GroupVar Name="ResponseR"/>
+      <GroupVar Name="Rho"/>
+      <GroupVar Name="Score"/>
+    </Event>
+    <Event Type="Extrinsic">
+      <Name>Decision</Name>
+      <Description>S indicates decision made</Description>
+      <Channel>Mouse</Channel>
+      <Edge>rising</Edge>
+      <Location>before</Location>
+      <Max>120000</Max>
+      <Min>0</Min>
+      <GroupVar Name="TrialNumber"/>
+      <GroupVar Name="RunTrialNumber"/>
+      <GroupVar Name="RunNumber"/>
+      <GroupVar Name="Agent"/>
+      <GroupVar Name="TargetX"/>
+      <GroupVar Name="TargetY"/>
+      <GroupVar Name="TargetR"/>
+      <GroupVar Name="DecisionT"/>
+      <GroupVar Name="ResponseX"/>
+      <GroupVar Name="ResponseY"/>
+      <GroupVar Name="ResponseR"/>
+      <GroupVar Name="Rho"/>
+      <GroupVar Name="Score"/>
+    </Event>
+    <Event Type="Extrinsic">
+      <Name>Response</Name>
+      <Description>S makes trial response</Description>
+      <Channel>Mouse</Channel>
+      <Edge>rising</Edge>
+      <Location>before</Location>
+      <Max>120000</Max>
+      <Min>0</Min>
+      <GroupVar Name="TrialNumber"/>
+      <GroupVar Name="RunTrialNumber"/>
+      <GroupVar Name="RunNumber"/>
+      <GroupVar Name="Agent"/>
+      <GroupVar Name="TargetX"/>
+      <GroupVar Name="TargetY"/>
+      <GroupVar Name="TargetR"/>
+      <GroupVar Name="ResponseX"/>
+      <GroupVar Name="ResponseY"/>
+      <GroupVar Name="ResponseR"/>
+      <GroupVar Name="Rho"/>
+      <GroupVar Name="Score"/>
+    </Event>
+    <Event Type="Extrinsic">
+      <Name>BeginFeedback</Name>
+      <Description>Result of trial is presented to S and Agent (if involved in trial)</Description>
+      <Channel>Mon</Channel>
+      <Edge>rising</Edge>
+      <Location>after</Location>
+      <Max>120000</Max>
+      <Min>0</Min>
+      <GroupVar Name="TrialNumber"/>
+      <GroupVar Name="RunTrialNumber"/>
+      <GroupVar Name="RunNumber"/>
+      <GroupVar Name="Agent"/>
+      <GroupVar Name="TargetX"/>
+      <GroupVar Name="TargetY"/>
+      <GroupVar Name="TargetR"/>
+      <GroupVar Name="ResponseX"/>
+      <GroupVar Name="ResponseY"/>
+      <GroupVar Name="ResponseR"/>
+      <GroupVar Name="Rho"/>
+      <GroupVar Name="Score"/>
+    </Event>
+  </Structure>
+</Experiment>
