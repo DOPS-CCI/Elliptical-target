@@ -1,0 +1,565 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     20933,        555]
+NotebookOptionsPosition[     19413,        520]
+NotebookOutlinePosition[     19808,        536]
+CellTagsIndexPosition[     19765,        533]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Ancillary functions", "Section",
+ CellChangeTimes->{{3.963398153997142*^9, 
+  3.963398159090057*^9}},ExpressionUUID->"e23d60b4-027f-4ea5-bd9d-\
+d7ce9f52afce"],
+
+Cell["Signed triangle altitude", "Text",
+ CellChangeTimes->{{3.963398203276717*^9, 
+  3.963398210986429*^9}},ExpressionUUID->"231e1c7a-2779-4b6c-adcc-\
+0a853ff2d0c9"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Q", "[", 
+   RowBox[{"V1_", ",", "V2_"}], "]"}], ":=", 
+  FractionBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"V1", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+     RowBox[{"V2", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], 
+    "-", 
+    RowBox[{
+     RowBox[{"V2", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+     RowBox[{"V1", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}]}], 
+   RowBox[{"Norm", "[", 
+    RowBox[{"V2", "-", "V1"}], "]"}]]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.8788253361624403`*^9, 3.8788253559684057`*^9}, {
+  3.878825402641943*^9, 3.878825414323848*^9}},
+ CellLabel->"In[6]:=",ExpressionUUID->"caf492b0-ef0a-44d5-870a-f65062ff7e8b"],
+
+Cell["Central angle of triangle", "Text",
+ CellChangeTimes->{{3.9633982354271097`*^9, 
+  3.9633982410041237`*^9}},ExpressionUUID->"9fa142a9-86ed-462c-8c6d-\
+0adadf9ba438"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"dd", "[", 
+   RowBox[{"Va_", ",", "Vb_"}], "]"}], ":=", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"A", "=", 
+       RowBox[{"Norm", "[", "Va", "]"}]}], ",", 
+      RowBox[{"B", "=", 
+       RowBox[{"Norm", "[", "Vb", "]"}]}]}], "}"}], ",", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"A", "\[Equal]", "0"}], "||", 
+       RowBox[{"B", "\[Equal]", "0"}]}], ",", "0", ",", 
+      RowBox[{"ArcCos", "[", 
+       FractionBox[
+        RowBox[{"Va", ".", "Vb"}], 
+        RowBox[{"A", " ", "B"}]], "]"}]}], "]"}]}], "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.8788278754869013`*^9, 3.878827935259121*^9}, {
+  3.878827977539892*^9, 3.8788280967220383`*^9}, {3.8788304853963213`*^9, 
+  3.8788304871385736`*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"90d27dc2-8766-4bca-a48c-ebc105befbef"],
+
+Cell["\<\
+Calculate triangular descriptive values for a given polygonal geometry; input \
+r is location of response and v is a list of polygon vertex locations, \
+counterclockwise.\
+\>", "Text",
+ CellChangeTimes->{{3.963398266914295*^9, 3.963398311882677*^9}, {
+  3.96339834417041*^9, 
+  3.9633984100850286`*^9}},ExpressionUUID->"b8ad09d8-4d0c-4aa3-a371-\
+f1f20d06f78b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PolyGeometry", "[", 
+   RowBox[{"r_", ",", "v_"}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"n", "=", 
+       RowBox[{"Length", "[", "v", "]"}]}], ",", "ip", ",", "vR", ",", "q", 
+      ",", "s", ",", "S"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ip", "=", 
+      RowBox[{"RotateLeft", "[", 
+       RowBox[{
+        RowBox[{"Range", "[", "n", "]"}], ",", "1"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"vR", "=", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "-", "r"}], "&"}], ",", "v"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"q", "=", 
+      RowBox[{"MapThread", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"N", "[", 
+          RowBox[{"Q", "[", 
+           RowBox[{"#1", ",", "#2"}], "]"}], "]"}], "&"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"vR", ",", 
+          RowBox[{
+          "vR", "\[LeftDoubleBracket]", "ip", "\[RightDoubleBracket]"}]}], 
+         "}"}]}], "]"}]}], ";", " ", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Signed", " ", "altitudes"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"s", "=", 
+      RowBox[{"MapThread", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"N", "[", 
+          RowBox[{"Norm", "[", 
+           RowBox[{"#1", "-", "#2"}], "]"}], "]"}], "&"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"v", ",", 
+          RowBox[{
+          "v", "\[LeftDoubleBracket]", "ip", "\[RightDoubleBracket]"}]}], 
+         "}"}]}], "]"}]}], ";", " ", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Lengths", " ", "of", " ", "sides"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"S", "=", 
+      RowBox[{"MapThread", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"N", "[", 
+          RowBox[{"dd", "[", 
+           RowBox[{"#1", ",", "#2"}], "]"}], "]"}], "&"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"vR", ",", 
+          RowBox[{
+          "vR", "\[LeftDoubleBracket]", "ip", "\[RightDoubleBracket]"}]}], 
+         "}"}]}], "]"}]}], ";", " ", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Central", " ", "angles"}], " ", "*)"}], "\[IndentingNewLine]", 
+     
+     RowBox[{"{", 
+      RowBox[{"n", ",", 
+       RowBox[{"0.5", 
+        RowBox[{"q", ".", "s"}]}], ",", "s", ",", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"N", "[", 
+           RowBox[{"Norm", "[", "#", "]"}], "]"}], "&"}], ",", "vR"}], "]"}], 
+       ",", 
+       RowBox[{"Abs", "[", "q", "]"}], ",", 
+       RowBox[{"Sign", "[", "q", "]"}], ",", "S"}], "}"}]}]}], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"number", " ", "of", " ", "sides"}], ",", " ", 
+     RowBox[{"areas", " ", "of", " ", "triangles"}], ",", " ", 
+     RowBox[{"length", " ", "of", " ", "sides"}], ",", " ", 
+     RowBox[{"lengths", " ", "of", " ", "radials"}], ",", " ", "altitudes", 
+     ",", " ", "signs", ",", " ", 
+     RowBox[{"central", " ", "angles"}]}], "*)"}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{
+  3.878468118315077*^9, {3.878468358500617*^9, 3.8784683730426207`*^9}, 
+   3.878469682889634*^9, 3.87872570824971*^9, {3.8788255496369343`*^9, 
+   3.878825559874946*^9}, {3.878825638498457*^9, 3.878825680968218*^9}, {
+   3.878825733626184*^9, 3.878825736880398*^9}, {3.8788257809199657`*^9, 
+   3.8788257959683237`*^9}, {3.878825875239859*^9, 3.878825883909521*^9}, {
+   3.878826664339965*^9, 3.878826682771254*^9}, 3.878826790698107*^9, {
+   3.878828274501779*^9, 3.878828405617651*^9}, {3.878830223805553*^9, 
+   3.878830239935171*^9}, {3.878830274277554*^9, 3.8788302818842154`*^9}, {
+   3.878830324780897*^9, 3.8788304197146673`*^9}},
+ CellLabel->"In[8]:=",ExpressionUUID->"878fefe2-e218-43ff-ab03-f6148d0c63d8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["PDF", "Section",
+ CellChangeTimes->{{3.963398428541603*^9, 
+  3.963398429061808*^9}},ExpressionUUID->"398d2479-c005-48a5-a227-\
+e68482018ed1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PDFPoly", "[", 
+   RowBox[{"\[Rho]_", ",", "geo_"}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"n", "=", 
+       RowBox[{
+       "geo", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}], ",", 
+      "ip", ",", 
+      RowBox[{"s", "=", 
+       RowBox[{
+       "geo", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}]}], ",", 
+      RowBox[{"d", "=", 
+       RowBox[{
+       "geo", "\[LeftDoubleBracket]", "4", "\[RightDoubleBracket]"}]}], ",", 
+      RowBox[{"alt", "=", 
+       RowBox[{
+       "geo", "\[LeftDoubleBracket]", "5", "\[RightDoubleBracket]"}]}], ",", 
+      RowBox[{"S", "=", 
+       RowBox[{
+       "geo", "\[LeftDoubleBracket]", "7", "\[RightDoubleBracket]"}]}], ",", 
+      "f", ",", "t"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ip", "=", 
+      RowBox[{"RotateLeft", "[", 
+       RowBox[{
+        RowBox[{"Range", "[", "n", "]"}], ",", "1"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"f", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"\[Rho]", "\[LessEqual]", 
+           RowBox[{
+           "alt", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}]}], 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"S", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}],
+           ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"t", "=", 
+            RowBox[{"ArcCos", "[", 
+             FractionBox[
+              RowBox[{
+              "alt", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+              "\[Rho]"], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Boole", "[", 
+              RowBox[{"\[Rho]", "<", 
+               RowBox[{
+               "d", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}]}], 
+              "]"}], 
+             RowBox[{"Sign", "[", 
+              RowBox[{
+               SuperscriptBox[
+                RowBox[{
+                "d", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+                "2"], "+", 
+               SuperscriptBox[
+                RowBox[{
+                "s", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+                "2"], "-", 
+               SuperscriptBox[
+                RowBox[{"d", "\[LeftDoubleBracket]", 
+                 RowBox[{
+                 "ip", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}],
+                  "\[RightDoubleBracket]"}], "2"]}], "]"}], 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"ArcCos", "[", 
+                FractionBox[
+                 RowBox[{
+                 "alt", "\[LeftDoubleBracket]", "i", 
+                  "\[RightDoubleBracket]"}], 
+                 RowBox[{
+                 "d", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}]],
+                 "]"}], "-", "t"}], ")"}]}], "+", 
+            RowBox[{
+             RowBox[{"Boole", "[", 
+              RowBox[{"\[Rho]", "<", 
+               RowBox[{"d", "\[LeftDoubleBracket]", 
+                RowBox[{
+                "ip", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+                "\[RightDoubleBracket]"}]}], "]"}], 
+             RowBox[{"Sign", "[", 
+              RowBox[{
+               SuperscriptBox[
+                RowBox[{"d", "\[LeftDoubleBracket]", 
+                 RowBox[{
+                 "ip", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}],
+                  "\[RightDoubleBracket]"}], "2"], "+", 
+               SuperscriptBox[
+                RowBox[{
+                "s", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+                "2"], "-", 
+               SuperscriptBox[
+                RowBox[{
+                "d", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+                "2"]}], "]"}], 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"ArcCos", "[", 
+                FractionBox[
+                 RowBox[{
+                 "alt", "\[LeftDoubleBracket]", "i", 
+                  "\[RightDoubleBracket]"}], 
+                 RowBox[{"d", "\[LeftDoubleBracket]", 
+                  RowBox[{
+                  "ip", "\[LeftDoubleBracket]", "i", 
+                   "\[RightDoubleBracket]"}], "\[RightDoubleBracket]"}]], 
+                "]"}], "-", "t"}], ")"}]}]}]}]}], "\[IndentingNewLine]", 
+         "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "n"}], "}"}]}], "]"}]}], ";", " ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Magnitude", " ", "of", " ", "contribution", " ", "of", " ", "each", 
+       " ", "triangle"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      FractionBox["\[Rho]", 
+       RowBox[{"geo", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]], 
+      RowBox[{
+       RowBox[{"geo", "\[LeftDoubleBracket]", "6", "\[RightDoubleBracket]"}], 
+       ".", "f"}]}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.878384978215684*^9, 3.878384982645892*^9}, 
+   3.878385019100264*^9, {3.8783851131865664`*^9, 3.878385152611477*^9}, 
+   3.878385184060264*^9, {3.878385241337446*^9, 3.8783852809117937`*^9}, {
+   3.878468902155411*^9, 3.878468973073436*^9}, {3.878469109240307*^9, 
+   3.878469124127499*^9}, 3.878469212710441*^9, {3.878726809335938*^9, 
+   3.878726810439034*^9}},
+ CellLabel->"In[9]:=",ExpressionUUID->"92e19220-e694-44a7-b361-ec88265d0320"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["CDF", "Section",
+ CellChangeTimes->{{3.963398442072547*^9, 
+  3.9633984425370417`*^9}},ExpressionUUID->"d6929912-ea27-4ab1-92ff-\
+a40d602b2593"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"CDFPoly", "[", 
+    RowBox[{"\[Rho]_", ",", "geo_"}], "]"}], ":=", "\[IndentingNewLine]", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"n", "=", 
+        RowBox[{
+        "geo", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}], ",", 
+       "ip", ",", 
+       RowBox[{"s", "=", 
+        RowBox[{
+        "geo", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}]}], ",", 
+       
+       RowBox[{"d", "=", 
+        RowBox[{
+        "geo", "\[LeftDoubleBracket]", "4", "\[RightDoubleBracket]"}]}], ",", 
+       
+       RowBox[{"alt", "=", 
+        RowBox[{
+        "geo", "\[LeftDoubleBracket]", "5", "\[RightDoubleBracket]"}]}], ",", 
+       
+       RowBox[{"S", "=", 
+        RowBox[{
+        "geo", "\[LeftDoubleBracket]", "7", "\[RightDoubleBracket]"}]}], ",", 
+       "a", ",", "b", ",", "\[Theta]", ",", "t"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"ip", "=", 
+       RowBox[{"RotateLeft", "[", 
+        RowBox[{
+         RowBox[{"Range", "[", "n", "]"}], ",", "1"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"a", "=", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Min", "[", 
+           RowBox[{"\[Rho]", ",", "#"}], "]"}], "&"}], ",", "d"}], "]"}]}], 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{"b", "=", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Min", "[", 
+           RowBox[{"\[Rho]", ",", "#"}], "]"}], "&"}], ",", 
+         RowBox[{
+         "d", "\[LeftDoubleBracket]", "ip", "\[RightDoubleBracket]"}]}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"\[Theta]", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"\[Rho]", "\[LessEqual]", 
+            RowBox[{
+            "alt", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}]}], 
+           ",", "\[IndentingNewLine]", 
+           RowBox[{
+           "S", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"t", "=", 
+             RowBox[{"ArcCos", "[", 
+              FractionBox[
+               RowBox[{
+               "alt", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+               "\[Rho]"], "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Boole", "[", 
+               RowBox[{"\[Rho]", "<", 
+                RowBox[{
+                "d", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}]}],
+                "]"}], 
+              RowBox[{"Sign", "[", 
+               RowBox[{
+                SuperscriptBox[
+                 RowBox[{
+                 "d", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+                 "2"], "+", 
+                SuperscriptBox[
+                 RowBox[{
+                 "s", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+                 "2"], "-", 
+                SuperscriptBox[
+                 RowBox[{"d", "\[LeftDoubleBracket]", 
+                  RowBox[{
+                  "ip", "\[LeftDoubleBracket]", "i", 
+                   "\[RightDoubleBracket]"}], "\[RightDoubleBracket]"}], 
+                 "2"]}], "]"}], 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"ArcCos", "[", 
+                 FractionBox[
+                  RowBox[{
+                  "alt", "\[LeftDoubleBracket]", "i", 
+                   "\[RightDoubleBracket]"}], 
+                  RowBox[{
+                  "d", "\[LeftDoubleBracket]", "i", 
+                   "\[RightDoubleBracket]"}]], "]"}], "-", "t"}], ")"}]}], 
+             "+", 
+             RowBox[{
+              RowBox[{"Boole", "[", 
+               RowBox[{"\[Rho]", "<", 
+                RowBox[{"d", "\[LeftDoubleBracket]", 
+                 RowBox[{
+                 "ip", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}],
+                  "\[RightDoubleBracket]"}]}], "]"}], 
+              RowBox[{"Sign", "[", 
+               RowBox[{
+                SuperscriptBox[
+                 RowBox[{"d", "\[LeftDoubleBracket]", 
+                  RowBox[{
+                  "ip", "\[LeftDoubleBracket]", "i", 
+                   "\[RightDoubleBracket]"}], "\[RightDoubleBracket]"}], "2"],
+                 "+", 
+                SuperscriptBox[
+                 RowBox[{
+                 "s", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+                 "2"], "-", 
+                SuperscriptBox[
+                 RowBox[{
+                 "d", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+                 "2"]}], "]"}], 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"ArcCos", "[", 
+                 FractionBox[
+                  RowBox[{
+                  "alt", "\[LeftDoubleBracket]", "i", 
+                   "\[RightDoubleBracket]"}], 
+                  RowBox[{"d", "\[LeftDoubleBracket]", 
+                   RowBox[{
+                   "ip", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], "\[RightDoubleBracket]"}]], 
+                 "]"}], "-", "t"}], ")"}]}]}]}]}], "\[IndentingNewLine]", 
+          "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "n"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       FractionBox["0.5", 
+        RowBox[{
+        "geo", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]], 
+       RowBox[{
+        RowBox[{"geo", "\[LeftDoubleBracket]", "6", "\[RightDoubleBracket]"}],
+         ".", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"alt", 
+           SqrtBox[
+            RowBox[{
+             SuperscriptBox["a", "2"], "+", 
+             SuperscriptBox["b", "2"], "-", 
+             RowBox[{"2", "a", " ", "b", " ", 
+              RowBox[{"Cos", "[", 
+               RowBox[{"S", "-", "\[Theta]"}], "]"}]}]}]]}], "+", 
+          RowBox[{
+           SuperscriptBox["\[Rho]", "2"], " ", "\[Theta]"}]}], ")"}]}]}]}]}], 
+    "]"}]}], "\[IndentingNewLine]"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.878468994186347*^9, 3.878469047009107*^9}, {
+  3.878469142415472*^9, 3.878469148383367*^9}, {3.878726822393917*^9, 
+  3.878726824062722*^9}, {3.885988030066378*^9, 3.885988036737261*^9}},
+ CellLabel->"In[10]:=",ExpressionUUID->"6849ee21-5489-4056-9aeb-c1a6d201942e"]
+}, Open  ]]
+},
+WindowSize->{808, 911},
+WindowMargins->{{876, Automatic}, {Automatic, 238}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"db2ec178-9c8e-4a67-b6ec-9893f9828215"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 164, 3, 67, "Section",ExpressionUUID->"e23d60b4-027f-4ea5-bd9d-d7ce9f52afce"],
+Cell[747, 27, 166, 3, 35, "Text",ExpressionUUID->"231e1c7a-2779-4b6c-adcc-0a853ff2d0c9"],
+Cell[916, 32, 763, 18, 65, "Input",ExpressionUUID->"caf492b0-ef0a-44d5-870a-f65062ff7e8b",
+ InitializationCell->True],
+Cell[1682, 52, 171, 3, 35, "Text",ExpressionUUID->"9fa142a9-86ed-462c-8c6d-0adadf9ba438"],
+Cell[1856, 57, 906, 25, 64, "Input",ExpressionUUID->"90d27dc2-8766-4bca-a48c-ebc105befbef",
+ InitializationCell->True],
+Cell[2765, 84, 370, 8, 58, "Text",ExpressionUUID->"b8ad09d8-4d0c-4aa3-a371-f1f20d06f78b"],
+Cell[3138, 94, 3865, 100, 257, "Input",ExpressionUUID->"878fefe2-e218-43ff-ab03-f6148d0c63d8",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7040, 199, 148, 3, 67, "Section",ExpressionUUID->"398d2479-c005-48a5-a227-e68482018ed1"],
+Cell[7191, 204, 5545, 135, 367, "Input",ExpressionUUID->"92e19220-e694-44a7-b361-ec88265d0320",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12773, 344, 150, 3, 67, "Section",ExpressionUUID->"d6929912-ea27-4ab1-92ff-a40d602b2593"],
+Cell[12926, 349, 6471, 168, 408, "Input",ExpressionUUID->"6849ee21-5489-4056-9aeb-c1a6d201942e",
+ InitializationCell->True]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
