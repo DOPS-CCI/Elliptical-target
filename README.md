@@ -31,3 +31,5 @@ Library of routines, some of which are used by the by the experimental protocol 
 Another library of routines, some of which are used by the protocol
 ## RTLibrary
 Library of routines which run the experimental protocol with millisecond timing resolution
+## Mathematica functions
+Mathematica notebooks and package used for performing statistical calculations on the dataset. Also includes a copy of the raw dataset described above.
