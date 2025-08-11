@@ -3,7 +3,7 @@ Each trial consists of a hidden generation of a target uniformly within the elli
 
 In this particular experimental run, there were a total of 13 sessions with a total of 368 trials. BD was the subject and there were two agents, MB and EK, for 10 and 3 of the experimental sessions respectively.
 ## Trial data - CSV file
-Each trial is represented by a line in the file with these items separated by a comma (no header line):
+Each trial is represented by a line in the file with these items separated by a comma (no header line; distances in cm):
 * Agent: Is agent active in this trial?
 * AgentID: Identifier of the agent for this trial (may or may not be active for this trial)
 * TargetCx: x coordinate of target in reference circle
